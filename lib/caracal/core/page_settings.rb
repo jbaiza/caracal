@@ -1,4 +1,4 @@
-require 'caracal/core/models/margin_model'
+require 'caracal/core/models/page_margin_model'
 require 'caracal/core/models/page_size_model'
 require 'caracal/errors'
 
@@ -25,6 +25,8 @@ module Caracal
           attr_reader :page_margin_bottom
           attr_reader :page_margin_left
           attr_reader :page_margin_right
+          attr_reader :page_margin_header
+          attr_reader :page_margin_footer
 
 
           #-------------------------------------------------------------
@@ -35,7 +37,7 @@ module Caracal
           # to 1in on each side.
           #
           def page_margins(options={}, &block)
-            model = Caracal::Core::Models::MarginModel.new(options, &block)
+            model = Caracal::Core::Models::PageMarginModel.new(options, &block)
 
             if model.valid?
               if (model.margin_top + model.margin_bottom < page_height) && (model.margin_left + model.margin_right < page_width)
@@ -43,6 +45,8 @@ module Caracal
                 @page_margin_bottom = model.margin_bottom
                 @page_margin_left   = model.margin_left
                 @page_margin_right  = model.margin_right
+                @page_margin_header = model.margin_header
+                @page_margin_footer = model.margin_footer
               else
                 raise Caracal::Errors::InvalidModelError, 'page_margins method requires margins to be smaller than the page size.'
               end

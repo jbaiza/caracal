@@ -406,12 +406,15 @@ module Caracal
       end
 
       def page_margin_options
-        {
+        options = {
           'w:top'    => document.page_margin_top,
           'w:bottom' => document.page_margin_bottom,
           'w:left'   => document.page_margin_left,
           'w:right'  => document.page_margin_right
         }
+        options['w:header'] = document.page_margin_header if document.page_margin_header
+        options['w:footer'] = document.page_margin_footer if document.page_margin_footer
+        options
       end
 
       def page_size_options
