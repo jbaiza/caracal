@@ -27,7 +27,6 @@ module Caracal
 
         # initialization
         def initialize(options={}, &block)
-          puts "DEBUG: #{options}"
           @tab_pos = DEFAULT_TAB_POS
           @tab_val = DEFAULT_TAB_VAL
           @tab_leader = DEFAULT_TAB_LEADER

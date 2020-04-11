@@ -37,7 +37,6 @@ module Caracal
         def settings(value)
           begin
             @tab_settings = value.map do |tab|
-              puts "DEBUG: #{tab}"
               case tab
               when Caracal::Core::Models::TabModel
                 tab
