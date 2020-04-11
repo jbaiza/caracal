@@ -2,6 +2,8 @@ require 'caracal/core/models/base_model'
 require 'caracal/core/models/bookmark_model'
 require 'caracal/core/models/link_model'
 require 'caracal/core/models/text_model'
+require 'caracal/core/models/tab_symbol_model'
+require 'caracal/core/models/tab_settings_model'
 require 'caracal/errors'
 
 
@@ -59,6 +61,9 @@ module Caracal
           }
         end
 
+        def tab_settings
+          @tab_settings
+        end
 
         #========== SETTERS ===============================
 
@@ -162,6 +167,26 @@ module Caracal
           model
         end
 
+        # .tab
+        def tab(*args, &block)
+          model = Caracal::Core::Models::TabSymbolModel.new
+          runs << model
+          model
+        end
+
+        # .tabs
+        def tabs(*args, &block)
+          options = Caracal::Utilities.extract_options!(args)
+          options.merge!({ settings: args.first }) if args.first
+
+          model = Caracal::Core::Models::TabSettingsModel.new(options, &block)
+          if model.valid?
+            @tab_settings = model
+          else
+            raise Caracal::Errors::InvalidModelError, ':tab_settings method must receive a tab configuration.'
+          end
+          model
+        end
 
         #========== VALIDATION ============================
 
