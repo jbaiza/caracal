@@ -29,6 +29,7 @@ module Caracal
         attr_reader :paragraph_italic
         attr_reader :paragraph_underline
         attr_reader :paragraph_bgcolor
+        attr_reader :paragraph_spacing
         attr_reader :paragraph_keep_next
 
         # initialization
@@ -76,7 +77,7 @@ module Caracal
         end
 
         # integers
-        [:size].each do |m|
+        [:size, :spacing].each do |m|
           define_method "#{ m }" do |value|
             instance_variable_set("@paragraph_#{ m }", value.to_i)
           end

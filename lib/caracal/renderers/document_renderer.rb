@@ -276,6 +276,7 @@ module Caracal
             xml['w'].pStyle({ 'w:val' => model.paragraph_style })  unless model.paragraph_style.nil?
             xml['w'].contextualSpacing({ 'w:val' => '0' })
             xml['w'].jc({ 'w:val' => model.paragraph_align })  unless model.paragraph_align.nil?
+            xml['w'].spacing({ 'w:line' => model.paragraph_spacing, 'w:lineRule' => "auto"}) unless model.paragraph_spacing.nil?
             xml['w'].keepNext if model.paragraph_keep_next
             render_tab_settings(xml, model.tab_settings)
             render_run_attributes(xml, model, true)
