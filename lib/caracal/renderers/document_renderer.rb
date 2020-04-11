@@ -154,6 +154,7 @@ module Caracal
             xml['w'].spacing({ 'w:lineRule' => 'auto', 'w:line' => ds.style_line })
             xml['w'].contextualSpacing({ 'w:val' => '0' })
             xml['w'].jc({ 'w:val' => model.image_align.to_s })
+            xml['w'].keepNext if model.image_keep_next
             xml['w'].rPr
           end
           xml['w'].r run_options do
@@ -275,6 +276,7 @@ module Caracal
             xml['w'].pStyle({ 'w:val' => model.paragraph_style })  unless model.paragraph_style.nil?
             xml['w'].contextualSpacing({ 'w:val' => '0' })
             xml['w'].jc({ 'w:val' => model.paragraph_align })  unless model.paragraph_align.nil?
+            xml['w'].keepNext if model.paragraph_keep_next
             render_tab_settings(xml, model.tab_settings)
             render_run_attributes(xml, model, true)
           end
